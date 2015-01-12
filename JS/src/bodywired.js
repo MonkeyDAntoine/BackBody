@@ -1,7 +1,9 @@
-var app=angular.module("bodywired",['ngRoute','ui.bootstrap']);
+var path="http://iagl-server.cloudapp.net/api";
 
-app.config(['$routeProvider',
-    function($routeProvider) {
+var app=angular.module("bodywired",['ngRoute','ui.bootstrap']);     
+
+app.config(['$routeProvider','$httpProvider',
+    function($routeProvider,$httpProvider) {
       $routeProvider
         .when('/aliments', {
           templateUrl: 'aliments.html',
@@ -14,6 +16,9 @@ app.config(['$routeProvider',
 	.otherwise({
 		redirectTo:'/aliments'
 	});
+	//$httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    	$httpProvider.defaults.useXDomain = true;
     }
 ]);
 

@@ -17,22 +17,44 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr class="success">
+				<th></th>
 				<th>Id</th>
 				<th>Nom</th>
 				<th>Catégorie</th>
-				<th>Date de modification</th>
 				<th><span class="glyphicon glyphicon-pencil" style="color:green"></span></th>
 				<th><span class="glyphicon glyphicon-trash" style="color:red"></span></th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr ng-repeat="aliment in aliments" ng-class="(($index%2) == 1) ? 'active' : ''">
-				<td>{{aliment.id}}</td>
+		<tbody ng-init="dev_item=[]">
+			<tr ng-init="dev_item[aliment.id]=false" ng-repeat-start="aliment in aliments" ng-class="(($index%2) == 1) ? 'active' : ''">
+				<td rowspan="2"><span ng-class="dev_item[aliment.id]?'glyphicon glyphicon-collapse-down':'glyphicon glyphicon-expand'" ng-click="dev_item[aliment.id]=!dev_item[aliment.id]"></span></td>
+				<td rowspan="2">{{aliment.id}}</td>
 				<td>{{aliment.nom}}</td>
-				<td>{{aliment.categorie}}</td>
-				<td>{{aliment.update}}</td>
-				<td><span class="glyphicon glyphicon-pencil btn" style="color:green" ng-click="update(aliment.id)"></span></td>
-				<td><span class="glyphicon glyphicon-trash btn" style="color:red" ng-click="delete(aliment.id)"></span></td>
+				<td><span ng-repeat="cat in aliment.categories">{{cat.nom}}</span></td>
+				<td rowspan="2"><span class="glyphicon glyphicon-pencil btn" style="color:green" ng-click="update(aliment.id)"></span></td>
+				<td rowspan="2"><span class="glyphicon glyphicon-trash btn" style="color:red" ng-click="delete(aliment.id)"></span></td>
+			</tr>
+			<tr ng-repeat-end>
+				<td colspan="2" ng-show="dev_item[aliment.id]">Déclinaison :<button type="button" class="btn btn-default" ng-click="addDeclinaison()"><span class="glyphicon glyphicon-plus" style="color:green"></span> Ajouter une déclinaison</button>
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Nom</th>
+								<th><span class="glyphicon glyphicon-pencil" style="color:green"></span></th>
+								<th><span class="glyphicon glyphicon-trash" style="color:red"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="dec in aliment.declinaisons">
+								<td>{{dec.id}}</td>
+								<td>{{aliment.nom+" "+parseEtat(dec.etats)}}</td>
+								<td><span class="glyphicon glyphicon-pencil btn" style="color:green" ng-click="updateDeclinaison(dec.id)"></span></td>
+								<td><span class="glyphicon glyphicon-trash btn" style="color:red" ng-click="deleteDeclinaison(dec.id)"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
 			</tr>
 		</tbody>
 	</table>

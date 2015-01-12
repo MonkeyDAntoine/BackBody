@@ -4,16 +4,24 @@
 <div class="modal-body">
 	<form role="form">
 		<div class="form-group">
+			<label for="etatAliment">Etats de la déclinaison</label>
+			<div class="form-inline">
+				<select multiple class="form-control" rows="5" style="width:100%">
+					<option ng-repeat="etat in etats">{{etat.nom}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
 			<label for="nutrimentsAliment">Nutriments de la déclinaison</label>
 			<div class="form-inline">
-				<select multiple class="form-control" rows="5" ng-model="unused" ng-change="onChangeUnused(unused)">
+				<select multiple class="form-control" rows="5" ng-model="unused" ng-change="onChangeUnused(unused)" style="width:45%">
 					<option ng-repeat="nutriment in nutrimentsUnused" ng-value="{{$index}}">{{nutriment.name}}</option>
 				</select>
 				<div style="display:inline-block;vertical-align:middle">
 					<button type="button" class="btn btn-default" style="display:block" ng-click="toUsed()">>></button>
 					<button type="button" class="btn btn-default" style="display:block" ng-click="toUnused()"><<</button>
 				</div>
-				<select multiple class="form-control" rows="5" ng-model="used" ng-change="onChangeUsed(used)">
+				<select multiple class="form-control" rows="5" ng-model="used" ng-change="onChangeUsed(used)" style="width:45%">
 					<option ng-repeat="nutriment in nutrimentsUsed" ng-value="{{$index}}">{{nutriment.name}}</option>
 				</select>
 			</div>
