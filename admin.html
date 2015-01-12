@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="Stylesheet" name="bootstrap" href="lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"/>
+		<link rel="Stylesheet" name="back_css" href="CSS/back.css"/>
+		<script type="text/javascript" src="lib/angular.min.js"></script>
+		<script type="text/javascript" src="lib/angular-route.min.js"></script>
+		<script type="text/javascript" src="lib/ui-bootstrap-tpls-0.11.2.min.js"></script>
+		<script type="text/javascript" src="JS/src/menu.js"></script>
+		<script type="text/javascript" src="JS/src/nutriments.js"></script>
+		<script type="text/javascript" src="JS/src/bodywired.js"></script>
+		<script type="text/javascript" src="JS/src/aliments.js"></script>
+		<script type="text/javascript" src="JS/src/menus.js"></script>
+	</head>
+	<body class="container" ng-app="bodywired" ng-controller="globalController">
+		<div class="row title">
+			<h2> Bodywired Back-end </h2>
+
+		</div>
+		<div class="row">
+			<nav class="col-md-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li ng-repeat="menu in menus"  ng-controller="menuItemController" ng-class="getClass(menu.link)">
+						<a ng-href="{{menu.link}}">{{menu.label}}</a>
+					</li>
+				</ul>
+			</nav>
+			<section class="col-md-9 container" ng-view>
+			</section>
+		</div>
+	</body>
+</html>

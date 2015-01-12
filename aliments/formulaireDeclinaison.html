@@ -1,0 +1,40 @@
+<div class="modal-header">
+	<h3 class="modal-title">Ajouter une déclinaison</h3>
+</div>
+<div class="modal-body">
+	<form role="form">
+		<div class="form-group">
+			<label for="nutrimentsAliment">Nutriments de la déclinaison</label>
+			<div class="form-inline">
+				<select multiple class="form-control" rows="5" ng-model="unused" ng-change="onChangeUnused(unused)">
+					<option ng-repeat="nutriment in nutrimentsUnused" ng-value="{{$index}}">{{nutriment.name}}</option>
+				</select>
+				<div style="display:inline-block;vertical-align:middle">
+					<button type="button" class="btn btn-default" style="display:block" ng-click="toUsed()">>></button>
+					<button type="button" class="btn btn-default" style="display:block" ng-click="toUnused()"><<</button>
+				</div>
+				<select multiple class="form-control" rows="5" ng-model="used" ng-change="onChangeUsed(used)">
+					<option ng-repeat="nutriment in nutrimentsUsed" ng-value="{{$index}}">{{nutriment.name}}</option>
+				</select>
+			</div>
+		</div>
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr class="success">
+					<th>Nutriments</th>
+					<th>Valeur</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="nutriment in nutrimentsUsed" ng-class="(($index%2) == 1) ? 'active' : ''">
+					<td>{{nutriment.name}}</td>
+					<td><input type="number" ng-model="nutrimentsUsed[$index].valeur" class="form-control"/></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>	
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="save()">Valider</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
